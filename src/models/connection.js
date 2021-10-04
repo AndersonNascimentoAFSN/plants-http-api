@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const OPTIONS = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}
+};
 
 const MONGO_DB_URL = process.env.MONGO_DB_URL || 'mongodb://mongodb:27017/Plant_Catalog';
 
@@ -20,5 +20,5 @@ const getConnection = () => (db
   }));
 
 module.exports = {
-getConnection,
+  getConnection,
 };

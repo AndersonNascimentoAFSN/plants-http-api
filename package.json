@@ -2,9 +2,12 @@
   "name": "SOLID_EXERCISE",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/api/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "dev": "nodemon .",
+    "test": "mocha ./tests/unit/*$NAME*.{test,spec}.js --exit",
+    "lint": "eslint --no-inline-config --ext .js --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "keywords": [],
   "author": "",
@@ -13,7 +16,9 @@
     "body-parser": "^1.19.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongodb": "^4.1.2"
+    "joi": "^17.4.2",
+    "mongodb": "^4.1.2",
+    "nyc": "^15.1.0"
   },
   "devDependencies": {
     "chai": "^4.3.4",
