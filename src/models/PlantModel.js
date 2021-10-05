@@ -33,7 +33,7 @@ const findById = async (id) => {
   const plantCollection = await mongoConnection.getConnection()
     .then((db) => db.collection(COLLECTION_NAME));
 
-  const plant = await plantCollection.findOne({ _id: ObjectId(id) }).toArray();
+  const plant = await plantCollection.findOne({ _id: ObjectId(id) });
 
   return plant;
 };
