@@ -4,8 +4,8 @@ const router = express.Router();
 
 const PlantController = require('../controllers/PlantController');
 
-router.post('/', PlantController.create);
+router.post('/plant', PlantController.create);
 
-router.get('/', PlantController.findAll);
+router.get('/plants', PlantController.findAll);
 
 module.exports = router;

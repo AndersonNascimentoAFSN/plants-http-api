@@ -12,17 +12,14 @@ app.use((_req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
   res.header('Access-Control-Allow-Headers', 
   'Content-Type, X-PINGOTHER, Authorization');
-  // '\'X-PINGOTHER\' \'Content-Type\', \'Authorization\', \'XMLHttpRequest\'');
 
   app.use(cors());
 
   next();
 });
 
-// app.use(cors());
-
 const router = require('../routes');
 
-app.use('/plants', router.PlantRouter);
+app.use('/catalog', router.PlantRouter);
 
 module.exports = app;
