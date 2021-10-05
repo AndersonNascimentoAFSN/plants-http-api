@@ -23,8 +23,13 @@ const findById = async (id) => {
   return plant;
 };
 
+const remove = async (id) => {
+  await PlantModel.remove(id);
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  remove,
 };
