@@ -11,6 +11,13 @@ const create = async ({ breed, needsSun, origin, size, specialCare = '' }) => {
   return newPlant;
 };
 
+const findAll = async () => {
+  const plants = await PlantModel.findAll();
+
+  return plants;
+};
+
 module.exports = {
   create,
+  findAll,
 };
