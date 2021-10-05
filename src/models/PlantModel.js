@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoConnection = require('./connection');
 const { serializePlants } = require('../utils/plantsModelUtils');
 
@@ -26,7 +27,19 @@ const findAll = async () => {
   return plants;
 };
 
+const findById = async (id) => {
+  if (!ObjectId.isValid(id)) return false;
+
+  const plantCollection = await mongoConnection.getConnection()
+    .then((db) => db.collection(COLLECTION_NAME));
+
+  const plant = await plantCollection.find({ _id: ObjectId(id) });
+
+  return plant;
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };
