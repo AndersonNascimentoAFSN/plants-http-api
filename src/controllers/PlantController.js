@@ -7,9 +7,16 @@ const create = async (req, res) => {
 
   if (newPlant.message) return res.status(newPlant.code).json({ message: newPlant.message });
 
-  res.status(200).json(newPlant);
+  res.status(201).json(newPlant);
+};
+
+const findAll = async (_req, res) => {
+  const plants = await PlantService.findAll();
+
+  res.status(200).json(plants);
 };
 
 module.exports = {
   create,
+  findAll,
 };
