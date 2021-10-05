@@ -38,6 +38,16 @@ const create = async ({ breed, needsSun, origin, size, specialCare = '' }) => {
   };
 };
 
+const findAll = async () => {
+  const plantCollection = await mongoConnection.getConnection()
+  .then((db) => db.collection(COLLECTION_NAME));
+
+  const plants = await plantCollection.find().toArray();
+
+  return plants;
+};
+
 module.exports = {
   create,
+  findAll,
 };
