@@ -7,17 +7,18 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use((_req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Method', 'GET, PUT, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', '\'X-PINGOTHER\' \'Content-Type\', \'Authorization');
+// app.use((_req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Method', 'GET, PUT, POST, DELETE');
+//   res.header('Access-Control-Allow-Headers', 
+//   '\'X-PINGOTHER\' \'Content-Type\', \'Authorization\', \'XMLHttpRequest\'');
 
-  app.use(cors());
+//   app.use(cors());
 
-  next();
-});
+//   next();
+// });
 
-// app.use(cors());
+app.use(cors());
 
 const router = require('../routes');
 

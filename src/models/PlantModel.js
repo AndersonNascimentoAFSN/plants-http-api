@@ -3,7 +3,7 @@ const mongoConnection = require('./connection');
 const COLLECTION_NAME = 'plants';
 
 const Countries = {
-  Brazil: 8,
+  brazil: 8,
   other: 7,
 };
 
@@ -20,7 +20,7 @@ const serializePlants = (plant) => ({
   size: plant.size,
   specialCare: {
     waterFrequency: waterFrequency(plant.origin, plant.needsSun, plant.size),
-    ...plant.specialCare,
+    info: plant.specialCare,
   },
 });
 
@@ -29,6 +29,8 @@ const create = async ({ breed, needsSun, origin, size, specialCare = '' }) => {
     .then((db) => db.collection(COLLECTION_NAME));
 
   const newPlant = serializePlants({ breed, needsSun, origin, size, specialCare });
+
+  console.log({ breed, needsSun, origin, size, specialCare });
 
   const { insertedId: _id } = await plantCollection.insertOne(newPlant);
 
