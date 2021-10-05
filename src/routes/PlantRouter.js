@@ -10,4 +10,6 @@ router.get('/plants', PlantController.findAll);
 
 router.get('/plant/:id', PlantController.findById);
 
+router.delete('/plant/:id', PlantController.remove);
+
 module.exports = router;
