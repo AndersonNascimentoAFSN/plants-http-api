@@ -33,13 +33,23 @@ const findById = async (id) => {
   const plantCollection = await mongoConnection.getConnection()
     .then((db) => db.collection(COLLECTION_NAME));
 
-  const plant = await plantCollection.find({ _id: ObjectId(id) }).toArray();
+  const plant = await plantCollection.findOne({ _id: ObjectId(id) }).toArray();
 
   return plant;
+};
+
+const remove = async (id) => {
+  if (!ObjectId.isValid(id)) return false;
+
+  const plantCollection = await mongoConnection.getConnection()
+    .then((db) => db.collection(COLLECTION_NAME));
+
+  await plantCollection.findOneAndDelete({ _id: ObjectId(id) });
 };
 
 module.exports = {
   create,
   findAll,
   findById,
+  remove,
 };
