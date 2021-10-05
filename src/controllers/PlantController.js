@@ -16,7 +16,16 @@ const findAll = async (_req, res) => {
   res.status(200).json(plants);
 };
 
+const findById = async (req, res) => {
+  const { id } = req.params;
+
+  const plant = await PlantService.findById(id);
+
+  res.status(200).json(plant);
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };
