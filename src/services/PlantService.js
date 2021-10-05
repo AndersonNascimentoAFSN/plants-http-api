@@ -17,7 +17,14 @@ const findAll = async () => {
   return plants;
 };
 
+const findById = async (id) => {
+  const plant = await PlantModel.findById(id) || {};
+
+  return plant;
+};
+
 module.exports = {
   create,
   findAll,
+  findById,
 };
