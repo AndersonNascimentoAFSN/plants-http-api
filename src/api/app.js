@@ -8,6 +8,6 @@ app.use(bodyParser.json());
 
 const router = require('../routes');
 
-app.use('/plant', router.PlantRouter);
+app.use('/plants', router.PlantRouter);
 
 module.exports = app;
