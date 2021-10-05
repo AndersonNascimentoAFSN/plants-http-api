@@ -20,7 +20,7 @@ const serializePlants = (plant) => ({
   size: plant.size,
   specialCare: {
     waterFrequency: waterFrequency(plant.origin, plant.needsSun, plant.size),
-    info: plant.specialCare,
+    ...plant.specialCare,
   },
 });
 
