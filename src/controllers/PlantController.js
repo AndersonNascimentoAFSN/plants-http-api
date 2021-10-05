@@ -24,8 +24,17 @@ const findById = async (req, res) => {
   res.status(200).json(plant);
 };
 
+const remove = async (req, res) => {
+  const { id } = req.params;
+
+  await PlantService.remove(id);
+
+  res.status(204).end();
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  remove,
 };
