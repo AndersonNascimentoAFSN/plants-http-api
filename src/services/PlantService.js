@@ -27,9 +27,18 @@ const remove = async (id) => {
   await PlantModel.remove(id);
 };
 
+const update = async (id, newPlant) => {
+  const plantUpdated = await PlantModel.update(id, newPlant) || {};
+
+  if (!plantUpdated) return false;
+
+  return plantUpdated;
+};
+
 module.exports = {
   create,
   findAll,
   findById,
   remove,
+  update,
 };
