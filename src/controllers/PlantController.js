@@ -32,9 +32,19 @@ const remove = async (req, res) => {
   res.status(204).end();
 };
 
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { breed, size, needSun, origin } = req.body;
+
+  const plantUpdated = await PlantService.update(id, { breed, size, needSun, origin });
+
+  res.status(200).json(plantUpdated);
+};
+
 module.exports = {
   create,
   findAll,
   findById,
   remove,
+  update,
 };
