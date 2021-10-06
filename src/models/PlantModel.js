@@ -47,9 +47,29 @@ const remove = async (id) => {
   await plantCollection.findOneAndDelete({ _id: ObjectId(id) });
 };
 
+const update = async (id, newPlant) => {
+  if (!ObjectId.isValid(id)) return false;
+
+  const plantCollection = await mongoConnection.getConnection()
+    .then((db) => db.collection(COLLECTION_NAME));
+
+  const plantUpdated = await plantCollection.findOneAndUpdate(
+    { _id: ObjectId(id) },
+    {
+      $set: { newPlant },
+    },
+    { 
+      returnNewDocument: true,
+    },
+  );
+
+  return plantUpdated;
+};
+
 module.exports = {
   create,
   findAll,
   findById,
   remove,
+  update,
 };
