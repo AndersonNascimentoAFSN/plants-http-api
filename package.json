@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/api/server.js",
   "scripts": {
-    "start": "node .",
+    "start": "pm2-runtime start ecosystem.config.yml --env prod",
     "dev": "nodemon .",
     "test": "mocha ./tests/unit/*$NAME*.{test,spec}.js --exit",
     "lint": "eslint --no-inline-config --ext .js --no-error-on-unmatched-pattern -c .eslintrc.json ."
