@@ -34,9 +34,10 @@ const remove = async (req, res) => {
 
 const update = async (req, res) => {
   const { id } = req.params;
-  const { breed, size, needSun, origin } = req.body;
+  const { breed, size, needsSun, origin, specialCare } = req.body;
 
-  const plantUpdated = await PlantService.update(id, { breed, size, needSun, origin });
+  const plantUpdated = await PlantService
+    .update(id, { breed, size, needsSun, origin, specialCare });
 
   res.status(200).json(plantUpdated);
 };

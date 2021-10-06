@@ -55,15 +55,14 @@ const update = async (id, newPlant) => {
 
   const plantUpdated = await plantCollection.findOneAndUpdate(
     { _id: ObjectId(id) },
-    {
-      $set: { newPlant },
-    },
-    { 
-      returnNewDocument: true,
-    },
+    { $set: newPlant },
+    // { returnOriginal: false },
+    { returnDocument: 'after' },
   );
 
-  return plantUpdated.value;
+  const plantSerialized = serializePlants(plantUpdated.value);
+
+  return plantSerialized;
 };
 
 module.exports = {
