@@ -63,7 +63,7 @@ const update = async (id, newPlant) => {
     },
   );
 
-  return plantUpdated;
+  return plantUpdated.value;
 };
 
 module.exports = {
