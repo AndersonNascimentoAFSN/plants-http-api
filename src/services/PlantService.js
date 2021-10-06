@@ -1,8 +1,8 @@
 const PlantModel = require('../models/PlantModel');
 const PlantSchema = require('../schemas/PlantSchema');
 
-const create = async ({ breed, needsSun, origin, size, specialCare = '' }) => {
-  const { error } = PlantSchema.plantCreateValidate({ breed, needsSun, origin, size });
+const create = async ({ breed, needsSun, origin, size, specialCare }) => {
+  const { error } = PlantSchema.plantCreateValidate({ breed, needsSun, origin, size, specialCare });
 
   if (error) return { code: 400, message: error.details[0].message };
 
