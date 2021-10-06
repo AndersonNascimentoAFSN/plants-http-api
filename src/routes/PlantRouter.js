@@ -12,6 +12,6 @@ router.get('/plant/:id', PlantController.findById);
 
 router.delete('/plant/:id', PlantController.remove);
 
-router.update('/plant/:id', PlantController.update);
+router.put('/plant/:id', PlantController.update);
 
 module.exports = router;
