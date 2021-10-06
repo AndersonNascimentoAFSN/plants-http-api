@@ -11,6 +11,8 @@ const PlantSchema = require('../../src/schemas/PlantSchema');
 
 const PlantService = require('../../src/services/PlantService');
 
+const PlantController = require('../../src/controllers/PlantController');
+
 describe('Testando a função `create` do model PlantModel', () => {
   let connectionMock;
 
@@ -517,10 +519,105 @@ describe('Testando a função `create` do service PlantService', () => {
 
 describe('Testando a função `create` do controller PlantController', () => {
   describe('quando uma planta é inserida com sucesso', () => {
+    const response = {};
+    const request = {};
 
+    const plantPayload = {
+      "breed": "orquídea",
+      "size": 99,
+      "needsSun": "true",
+      "origin": "Brazil",
+      "specialCare": { "temp": 10 },
+    }
+
+    before(() => {
+      request.body = {
+        "breed": plantPayload.breed,
+        "size": plantPayload.size,
+        "needsSun": plantPayload.needsSun,
+        "origin": plantPayload.origin,
+        "specialCare": plantPayload.specialCare,
+      }
+
+      response.status = sinon.stub()
+        .returns(response);
+      response.json = sinon.stub()
+        .returns();
+
+      sinon.stub(PlantService, 'create')
+        .resolves({
+          "breed": plantPayload.breed,
+          "size": plantPayload.size,
+          "needsSun": plantPayload.needsSun,
+          "origin": plantPayload.origin,
+          "specialCare": plantPayload.specialCare,
+        });
+    });
+
+    after(() => {
+      PlantService.create.restore();
+    });
+
+    it('é chamado o método `status` passando o código 201 como parâmetro', async () => {
+      await PlantController.create(request, response);
+
+      expect(response.status.calledWith(201)).to.be.equal(true);
+    });
+
+    it('é chamado o método `json` passando os dados do produto criado como parâmetro', async () => {
+      await PlantController.create(request, response);
+      
+      expect(response.json.calledWith(plantPayload)).to.be.equal(true);
+    });
   });
 
   describe('quando uma planta não é inserida', () => {
+    const response = {};
+    const request = {};
 
+    const plantPayload = {
+      "breed": "orquídea",
+      "size": 99,
+      "needsSun": "true",
+      "origin": "Brazil",
+      "specialCare": { "temp": 10 },
+    }
+
+    before(() => {
+      request.body = {
+        // "breed": plantPayload.breed,
+        "size": plantPayload.size,
+        "needsSun": plantPayload.needsSun,
+        "origin": plantPayload.origin,
+        "specialCare": plantPayload.specialCare,
+      }
+
+      response.status = sinon.stub()
+        .returns(response);
+      response.json = sinon.stub()
+        .returns();
+
+      sinon.stub(PlantService, 'create')
+        .resolves({
+          code: 400,
+          message: "\"breed\" is required",
+        });
+    });
+
+    after(() => {
+      PlantService.create.restore();
+    });
+
+    it('é chamado o método `status` passando o código 400 como parâmetro', async () => {
+      await PlantController.create(request, response);
+
+      expect(response.status.calledWith(400)).to.be.equal(true);
+    });
+
+    it('é chamado o método `json` passando um objeto contendo a propriedade `message` como parâmetro', async () => {
+      await PlantController.create(request, response);
+      
+      expect(response.json.calledWith({ message: "\"breed\" is required" })).to.be.equal(true);
+    });
   });
 });
